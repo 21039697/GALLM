@@ -1,0 +1,11 @@
+accelerate==1.4.0
+bitsandbytes>=0.45; platform_system != "Windows"
+numpy>=1.26,<3
+pandas>=2.2,<3
+peft==0.14.0
+safetensors>=0.5
+sentencepiece>=0.2
+tensorboard>=2.17
+torch>=2.2
+tqdm>=4.67
+transformers==4.49.0

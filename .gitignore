@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.idea/
+.venv/
+outputs/
+runs/
+
+# Shipped co-occurrence matrices and embeddings are part of the release.
+# Keep locally generated training checkpoints out of Git.
+data/*/sasrec_best.pt
+data/*/sasrec_metrics.json
+SASRec/log/
+tmp/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.simplified-backup
