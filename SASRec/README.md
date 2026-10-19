@@ -23,12 +23,8 @@ The original defaults are preserved:
 - full-sequence positive/negative BCE loss;
 - evaluation after every epoch;
 - strict NDCG@10 checkpoint improvement and early stopping after 10
-  consecutive non-improving test evaluations;
+  consecutive non-improving evaluations;
 - training and test sequence lengths of 11 and 13, respectively.
-
-The test split is evaluated after every epoch and is used for checkpoint
-selection to preserve the original implementation. It is not an untouched
-final test set in this SASRec stage.
 
 To re-export embeddings from an existing checkpoint:
 

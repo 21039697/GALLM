@@ -25,16 +25,18 @@ If `--output-dir` is omitted, training creates `outputs/<dataset>/<mode>/<timest
 
 ## Multiple GPUs
 
-Global batch size must be divisible by `micro_batch_size × GPU_count`. With four GPUs and the defaults, gradient accumulation is 2. Supply a shared output directory:
+Use `CUDA_VISIBLE_DEVICES` to select GPU IDs, and set the process count to the number of selected GPUs. For example, `CUDA_VISIBLE_DEVICES=0,2` uses GPUs 0 and 2, which appear as local devices 0 and 1 inside the processes.
+
+Global batch size must be divisible by `micro_batch_size × GPU_count`. With two GPUs and the defaults, gradient accumulation is 4. Supply a shared output directory:
 
 ```bash
-torchrun --standalone --nproc_per_node=4 train.py \
+CUDA_VISIBLE_DEVICES=0,2 torchrun --standalone --nproc_per_node=2 train.py \
   --dataset Clothing --mode gallm \
   --base-model meta-llama/Llama-3.2-3B \
   --output-dir outputs/Clothing/gallm/run-01 \
   --batch-size 64 --micro-batch-size 8 --epochs 5
 
-accelerate launch --num_processes 4 inference.py \
+CUDA_VISIBLE_DEVICES=0,2 accelerate launch --multi_gpu --num_processes 2 inference.py \
   --dataset Clothing --mode gallm \
   --base-model meta-llama/Llama-3.2-3B \
   --checkpoint outputs/Clothing/gallm/run-01/final \

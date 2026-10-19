@@ -29,7 +29,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-On Windows, activate with `.\.venv\Scripts\Activate.ps1` and add `--no-8bit` to training commands. The custom model currently supports Llama architectures.
+The custom model currently supports Llama architectures.
 
 ## Datasets
 
@@ -83,6 +83,25 @@ Change `--mode` in both training and inference to run the included comparisons:
 
 [Detailed usage](docs/usage.md) covers multi-GPU commands, optimizer settings, checkpoints, and decoding options. Use `--help` on each script for all arguments.
 
+## Multiple GPUs
+
+Set `CUDA_VISIBLE_DEVICES` to choose GPU IDs. For example, train and run inference on GPUs **0 and 2**:
+
+```bash
+CUDA_VISIBLE_DEVICES=0,2 torchrun --standalone --nproc_per_node=2 train.py \
+  --dataset Clothing --mode gallm \
+  --base-model meta-llama/Llama-3.2-3B \
+  --output-dir outputs/Clothing/gallm/run-01
+
+CUDA_VISIBLE_DEVICES=0,2 accelerate launch --multi_gpu --num_processes 2 inference.py \
+  --dataset Clothing --mode gallm \
+  --base-model meta-llama/Llama-3.2-3B \
+  --checkpoint outputs/Clothing/gallm/run-01/final \
+  --output outputs/Clothing/gallm/run-01/predictions.json
+```
+
+Set the process count to the number of selected GPUs. See [multi-GPU settings](docs/usage.md#multiple-gpus) for batch-size details.
+
 ## Code layout
 
 ```text
@@ -98,8 +117,6 @@ evaluate_batch_match.py     HR and NDCG evaluation
 scripts/check_data.py       Dataset and artifact validation
 docs/                       Data and advanced usage documentation
 ```
-
-**Reproduction note:** this release contains sampled train/test CSVs and no validation CSVs. The existing SASRec routine selects checkpoints on test NDCG@10. This differs from the paper's described train/validation/test protocol; see [data preparation](docs/data.md#evaluation-protocol) before comparing results.
 
 ## Citation
 

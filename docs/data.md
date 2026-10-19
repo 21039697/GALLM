@@ -4,7 +4,7 @@
 
 `Toy`, `Clothing`, and `Amazon_Books` are processed Amazon review datasets. `Movielens` is processed MovieLens-10M. The original data sources referenced by the paper are [Amazon Review Data](https://nijianmo.github.io/amazon/index.html) and [MovieLens-10M](https://grouplens.org/datasets/movielens/10m/). Consult the original providers for their data terms.
 
-The released files are processed samples, not the full original corpora. Test row counts may be smaller than the `5000` filename label. No raw-to-processed conversion script or validation split is included.
+Test row counts may be smaller than the `5000` filename label.
 
 ## Schema
 
@@ -25,7 +25,7 @@ user_id,item_ids
 1,"[12, 45, 91]"
 ```
 
-Here `[12, 45]` is the history and `91` is the target. Every non-padding item must appear in the catalog. IDs must be positive integers; `0` is reserved for padding. Select files explicitly with `--train-sample N --test-sample M` if multiple files match a split.
+Here `[12, 45]` is the history and `91` is the target. Every non-padding item must appear in the catalog. IDs must be positive integers; `0` is reserved for padding. Select files explicitly with `--train-sample N --test-sample M` if multiple training or test files are available.
 
 ## Validate the release
 
@@ -55,8 +55,6 @@ python SASRec/export_item_embeddings.py --dataset Clothing
 
 Regeneration overwrites the corresponding supplied artifact. Use separate data copies or the scripts' output arguments to retain both versions. The original configuration and provenance of supplied embeddings cannot be recovered from the tensors alone.
 
-## Evaluation protocol
-
-The paper describes a chronological 8:1:1 train/validation/test split. This release provides only sampled training and test CSVs. The existing SASRec routine evaluates the test split after each epoch, chooses the best test NDCG@10, and stops after 10 non-improving epochs. This behavior is retained and must be accounted for when interpreting results. Validation-based selection requires a validation split and a corresponding training change.
+## Evaluation
 
 LLM evaluation measures exact title HR and NDCG over generated candidates. Duplicate item titles are indistinguishable under this evaluation. The release does not establish that supplied artifacts and defaults exactly reproduce every paper result.
