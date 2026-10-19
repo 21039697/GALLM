@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use GALLM in your research, please cite the paper below."
+type: software
+title: GALLM
+url: "https://github.com/21039697/GALLM"
+repository-code: "https://github.com/21039697/GALLM"
+authors:
+  - family-names: Yan
+    given-names: Fenglin
+  - family-names: Wang
+    given-names: Bohao
+  - family-names: Zhang
+    given-names: Jian
+  - family-names: Cui
+    given-names: Yu
+  - family-names: Zheng
+    given-names: Tongya
+  - family-names: Feng
+    given-names: Ye
+  - family-names: Wang
+    given-names: Can
+  - family-names: Chen
+    given-names: Jiawei
+preferred-citation:
+  type: article
+  title: "Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation"
+  authors:
+    - family-names: Yan
+      given-names: Fenglin
+    - family-names: Wang
+      given-names: Bohao
+    - family-names: Zhang
+      given-names: Jian
+    - family-names: Cui
+      given-names: Yu
+    - family-names: Zheng
+      given-names: Tongya
+    - family-names: Feng
+      given-names: Ye
+    - family-names: Wang
+      given-names: Can
+    - family-names: Chen
+      given-names: Jiawei
+  journal: "arXiv preprint arXiv:2608.12184"
+  year: 2026
+  doi: "10.48550/arXiv.2608.12184"
+  url: "https://arxiv.org/abs/2608.12184"

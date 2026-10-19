@@ -1,8 +1,21 @@
 # GALLM
 
-Official code for **Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation**.
+Official code for **[Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation](https://arxiv.org/abs/2608.12184)**.
+
+Fenglin Yan, Bohao Wang, Jian Zhang, Yu Cui, Tongya Zheng, Ye Feng, Can Wang, and Jiawei Chen.
+
+[![arXiv](https://img.shields.io/badge/arXiv-2608.12184-b31b1b.svg)](https://arxiv.org/abs/2608.12184)
+[Paper PDF](https://arxiv.org/pdf/2608.12184) · [Citation](#citation)
 
 GALLM brings collaborative signals into LLM attention through three learnable relations: **Item–Item**, **Item–Text**, and **Text–Text**. This repository includes GALLM, BigRec and LLaRA comparison modes, and four processed datasets.
+
+## Overview
+
+[![Overview of GALLM: hybrid prompts, collaborative graph construction, and graph-aware attention injection](docs/assets/gallm-overview.png)](https://arxiv.org/abs/2608.12184)
+
+GALLM augments item titles with collaborative item tokens, then constructs a graph over the resulting prompt. Item–Item relations encode global co-occurrence, Item–Text relations align items with their descriptions, and Text–Text relations preserve semantic dependencies. Learnable relation biases inject this graph into LLM attention without an additional graph encoder.
+
+*Figure 2 from the [paper](https://arxiv.org/abs/2608.12184). Click the figure to open the paper.*
 
 ## Installation
 
@@ -87,3 +100,23 @@ docs/                       Data and advanced usage documentation
 ```
 
 **Reproduction note:** this release contains sampled train/test CSVs and no validation CSVs. The existing SASRec routine selects checkpoints on test NDCG@10. This differs from the paper's described train/validation/test protocol; see [data preparation](docs/data.md#evaluation-protocol) before comparing results.
+
+## Citation
+
+If you find this work useful, please cite our paper:
+
+```bibtex
+@article{yan2026gallm,
+  title   = {Making Collaborative Signals Count: Graph-Aware Large Language Models for Sequential Recommendation},
+  author  = {Yan, Fenglin and Wang, Bohao and Zhang, Jian and Cui, Yu and Zheng, Tongya and Feng, Ye and Wang, Can and Chen, Jiawei},
+  journal = {arXiv preprint arXiv:2608.12184},
+  year    = {2026},
+  eprint  = {2608.12184},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.IR},
+  doi     = {10.48550/arXiv.2608.12184},
+  url     = {https://arxiv.org/abs/2608.12184}
+}
+```
+
+Machine-readable citation metadata are available in [CITATION.cff](CITATION.cff).
